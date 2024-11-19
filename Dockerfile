@@ -5,7 +5,7 @@ RUN npm install && npm run build
 
 FROM node:20-slim
 WORKDIR /app
-COPY --from=builder build/ /app/build
+COPY --from=builder app/build/ /app/build
 
 RUN addgroup --system kucing && adduser --system --ingroup kucing kucing \
 && chown -R kucing:kucing /app && npm install -g serve
