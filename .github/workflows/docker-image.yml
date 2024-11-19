@@ -22,7 +22,7 @@ jobs:
       run: |
         VERSION=${{ github.ref_name }}  
         EPOCH=$(date +%s)  # Generate epoch timestamp
-        IMAGE_NAME=dev4w4n/emasjid-maintenance-${VERSION}-${EPOCH}
+        IMAGE_NAME=dev4w4n/emasjid-maintenance:${VERSION}.${EPOCH}
         docker build -t emasjid-maintenance .
         docker tag emasjid-maintenance $IMAGE_NAME
         docker push $IMAGE_NAME
