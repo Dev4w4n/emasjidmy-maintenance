@@ -1,13 +1,13 @@
-FROM nginx:alpine
+# Step 1: Build the static files
+FROM node:20-slim AS builder
+WORKDIR /app
+COPY . .
+RUN npm install && npm run build
 
-# Set working directory to /etc/nginx
-WORKDIR /etc/nginx
+# Step 2: Use Nginx for serving the static files
+FROM nginx:stable-alpine
+# Copy the built files to Nginx's default static file location
+COPY --from=builder /app/build /usr/share/nginx/html
 
-# Copy nginx configuration file
-COPY nginx.conf /etc/nginx/nginx.conf
-
-# Expose port 80
+# Expose the default Nginx port
 EXPOSE 3000
-
-# Start Nginx service
-CMD ["nginx", "-g", "daemon off;"]
