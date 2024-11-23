@@ -1,17 +1,14 @@
+# Step 1: Build the static files
 FROM node:20-slim AS builder
 WORKDIR /app
 COPY . .
 RUN npm install && npm run build
 
-FROM node:20-slim
-WORKDIR /app
-COPY --from=builder app/build/ /app/build
+# Step 2: Use Nginx for serving the static files
+FROM nginx:stable-alpine
+# Copy the built files to Nginx's default static file location
+COPY --from=builder /app/build /usr/share/nginx/html
 
-RUN addgroup --system kucing && adduser --system --ingroup kucing kucing \
-&& chown -R kucing:kucing /app && npm install -g serve
+# Expose the default Nginx port
+EXPOSE 80
 
-EXPOSE 3000
-
-USER kucing
-
-CMD ["serve", "-s", "build", "-l", "3000"]
