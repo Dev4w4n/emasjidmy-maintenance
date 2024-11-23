@@ -10,4 +10,4 @@ FROM nginx:stable-alpine
 COPY --from=builder /app/build /usr/share/nginx/html
 
 # Expose the default Nginx port
-EXPOSE 3000
+EXPOSE 80

@@ -6,14 +6,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#000000" />
   <meta name="E-Masjid" content="Sistem masjid" />
+  <!-- Dynamically load assets and env-config.js -->
   <script>
-    // Set the base URL dynamically based on the current location
-    const baseUrl = `${window.location.origin}/`;
-    document.write(`
-          <link rel="icon" href="${baseUrl}favicon.ico" />
-          <link rel="apple-touch-icon" href="${baseUrl}logo192.png" />
-          <link rel="manifest" href="${baseUrl}manifest.json" />
-        `);
+    const currentDomain = window.location.origin;
+
+    // Dynamically set favicon
+    const favicon = document.createElement("link");
+    favicon.rel = "icon";
+    favicon.href = `${currentDomain}/web/favicon.ico`;
+    document.head.appendChild(favicon);
+
+    // Dynamically set Apple Touch Icon
+    const appleTouchIcon = document.createElement("link");
+    appleTouchIcon.rel = "apple-touch-icon";
+    appleTouchIcon.href = `${currentDomain}/web/logo192.png`;
+    document.head.appendChild(appleTouchIcon);
+
+    // Dynamically set manifest
+    const manifest = document.createElement("link");
+    manifest.rel = "manifest";
+    manifest.href = `${currentDomain}/web/manifest.json`;
+    document.head.appendChild(manifest);
+
   </script>
   <title>E-Masjid</title>
 </head>
