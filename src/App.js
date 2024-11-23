@@ -19,7 +19,7 @@ function App() {
     if (currentPath === '/' || currentPath === '') {
       setTimeout(() => {
         window.location.href = `https://${dynamicSubdomain}.e-masjid.my/web`;
-      }, 1500);
+      }, 1000);
     }
   }, [dynamicSubdomain]);
 
